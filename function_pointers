@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+int square(int a){
+    return a * a;
+}
+
+int cube(int a){
+    return a * a * a;
+}
+
+int absolute(int a){
+    return (a < 0) ? -a : a;
+}
+
+/* apply operation to array IN PLACE */
+void apply(int (*op)(int), int arr[], int size){
+    for(int i = 0; i < size; ++i){
+        arr[i] = op(arr[i]);
+    }
+}
+
+int main(){
+    typedef int (*func)(int);
+    func ops[3] = {square, cube, absolute};
+
+    int choice, size;
+
+    printf("Enter array size: ");
+    scanf("%d", &size);
+
+    int arr[size];
+
+    printf("Select operation:\n0: square\t1: cube\t2: absolute\n");
+    scanf("%d", &choice);
+
+    if(choice < 0 || choice > 2){
+        printf("Invalid input\n");
+        return 0;
+    }
+
+    for(int i = 0; i < size; ++i){
+        printf("Enter element %d: ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+
+    apply(ops[choice], arr, size);
+
+    printf("Resulting array: ");
+    for(int i = 0; i < size; ++i){
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
