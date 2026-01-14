@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <string.h>//for string functions
+int main(){
+    char name[20];
+    int flag=1;
+    printf("enter a string: ");
+    fgets(name,20,stdin);
+    int len=strlen(name);
+    if(name[len-1]=='\n'){
+        name[len-1]='\0';//removes space at the end
+        --len;
+    }
+   for(int i=0;i<len/2;++i){
+       if(name[i]!=name[len-1-i]){
+           flag=0;
+           break;
+       }
+   }
+   if(flag){
+       printf("a palindrome");
+   }
+   else
+   printf("not a palindrome");
+    return 0;
+}
