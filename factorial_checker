@@ -1,0 +1,20 @@
+#include <stdio.h>
+int facto(int n){
+    if(n==0||n==1){
+        return 1;
+    }
+    int f;
+    f=n*facto(n-1);
+    return f;
+}
+int main(){
+    int number;
+    printf("enter a number: ");
+    scanf("%d",&number);
+    if(number< 0){
+        printf("invalid input!");
+        return 0;
+    }
+    printf("the factorial is %d",facto(number));
+    return 0;
+}
