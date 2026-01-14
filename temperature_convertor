@@ -1,0 +1,26 @@
+#include <stdio.h>
+//temperature convertor
+ int main(){
+    float degrees,faren;
+    char unit;
+    label:
+printf("what is the temp unit(F for fahrenheit, C for degrees): \n");
+    scanf("%c",&unit);
+    if(unit=='C'){
+    printf("enter temperature; ");
+    scanf("%f",&degrees);
+    faren=(degrees*9/5)+32;
+    printf("temperature is %.2f farenheight",faren);
+    }
+    else if(unit=='F'){
+printf("enter temperautre: ");
+scanf("%f",&faren);
+degrees=(faren-32)*5/9;
+printf("temperature in degrees is %.2f degrees",degrees);
+    }
+    else {
+        printf("invalid input!\n");
+        goto label;
+    }
+    return 0;
+}
