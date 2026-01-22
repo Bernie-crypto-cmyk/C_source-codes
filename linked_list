@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+typedef struct Node{
+    char name[40];
+    int id;
+    float gpa;
+    struct Node *next;
+}Node;
+
+void newNode(Node**head,const char *name,int id,float gpa){
+    Node *newNode=(Node*)malloc(sizeof(Node));
+    if(newNode==NULL){
+        printf("memory not allocated");
+        exit (1);
+    }
+    strcpy(newNode->name,name);
+    newNode->id=id;
+    newNode->gpa=gpa;
+    newNode->next=*head;
+    *head=newNode;
+    printf("%s(%d) added to list\n",name,id);
+}
+int printList(Node *head){
+    if(head==NULL){
+        printf("empty list!");
+        return 0;
+    }
+    Node *current=head;
+    printf("\n----lIST----\n");
+    while(current!=NULL){
+        printf("Name:%s\tID:%d\tGPA:%.2f\n",current->name,current->id,current->gpa);
+        current=current->next;
+    }
+}
+int main(){
+    Node *head=(Node*)malloc(sizeof(Node));
+    if(!head){
+        printf("memory not allocated");
+        exit (1);
+    }
+    head->next=NULL;
+    newNode(&head,"Alice",201,2.0);
+    newNode(&head,"Bob",912,4.23);
+    newNode(&head,"David",43,3.2);
+    printList(head);
+    return 0;
