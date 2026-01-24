@@ -33,6 +33,40 @@ int printList(Node *head){
         current=current->next;
     }
 }
+int insert_middle(Node **head,const char *name,int id,float gpa,int id_prev){
+    if (*head==NULL){
+        printf("List is empty\n");
+        return 0;
+    }
+    Node *newNode=(Node*)malloc(sizeof(Node));
+    if(!newNode){
+        printf("memory not allocated\n");
+        exit(1);
+    }
+    strcpy(newNode->name,name);
+    newNode->id=id;
+    newNode->gpa=gpa;
+    
+    Node *current=*head;
+    int flag=0;
+    while(current!=NULL){
+        if(current->id==id_prev){
+            newNode->next=current->next;
+            current->next=newNode;
+            flag=1;
+            break;
+        }
+        current=current->next;
+    }
+    if(!flag){
+        printf("id of pevious student not found\n");
+        return 0;
+    }
+    else{
+        printf("%s(%d) added successfully\n",name,id);
+        return 1;
+    }
+}
 int main(){
     Node *head=(Node*)malloc(sizeof(Node));
     if(!head){
@@ -43,5 +77,6 @@ int main(){
     newNode(&head,"Alice",201,2.0);
     newNode(&head,"Bob",912,4.23);
     newNode(&head,"David",43,3.2);
+insert_middle(&head,"Cynthia",287,4.98,234);
     printList(head);
     return 0;
